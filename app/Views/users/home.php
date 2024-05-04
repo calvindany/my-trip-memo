@@ -1,11 +1,11 @@
-<?= $this->extends('layout/template'); ?>
+<?= $this->extend('layout/template'); ?>
 
 
 <?= $this->section('content') ?>
 <div class="hero relative mt-[70px]">
-    <img class="hidden md:block w-full h-full" src="/img/pexels-pixabay-248195.jpg"alt=""/>
+    <img class="hidden md:block w-full h-full" src="/images/pexels-pixabay-248195.jpg"alt=""/>
     
-    <img class="block md:hidden w-full h-full" src="/img/mtfujifeatured.jpg" alt=""/>
+    <img class="block md:hidden w-full h-full" src="/images/mtfujifeatured.jpg" alt=""/>
 
     <!-- Overlay Background -->
     <div class="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
