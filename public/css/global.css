@@ -1,0 +1,19 @@
+.custom-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 10px;
+}
+
+.custom-content {
+  grid-column: 3 / span 8;
+}
+
+.card-list-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+}
+
+.nav {
+  backdrop-filter: blur(10px);
+}
