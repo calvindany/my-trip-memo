@@ -17,3 +17,10 @@
 .nav {
   backdrop-filter: blur(10px);
 }
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
