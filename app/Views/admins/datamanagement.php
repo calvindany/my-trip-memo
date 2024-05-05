@@ -2,31 +2,31 @@
 
 
 <?= $this->section('script') ?>
-    <!-- Added JQuery CDN -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <!-- !Added JQuery CDN -->
+  <!-- Added JQuery CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- !Added JQuery CDN -->
 
-    <!-- Added Summernote Plugins -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-    <script>
-      $(document).ready(function () {
-        $("#summernote").summernote({
-          height: 250,
-        });
-        $(".dropdown-toggle").dropdown();
+  <!-- Added Summernote Plugins -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
+    rel="stylesheet"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("#summernote").summernote({
+        height: 250,
       });
-    </script>
-    <!-- !Added Summernote Plugins -->
+      $(".dropdown-toggle").dropdown();
+    });
+  </script>
+  <!-- !Added Summernote Plugins -->
 <?= $this->endSection(); ?>
 
 <?= $this->section('content') ?>
     <div class="custom-container mt-[70px]">
       <div
-        class="custom-content flex flex-col items-start justify-center mt-[10vh]"
+        class="custom-content flex flex-col items-start justify-center mt-[10vh] mb-10"
       >
         <div class="w-full text-left mb-8">
           <h1 class="font-poppins font-medium text-2xl text-darkgrey mb-2">
