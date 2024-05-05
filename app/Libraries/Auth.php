@@ -6,15 +6,15 @@ class Auth
 {
     public static function setAuth($data) {
         $session = session();
-        $isLoggin = ['isLoggedIn'=>true];
+        $isLogging = ['isLoggedIn' => true];
 
-        $session.set($isLoggin);
-        $session.set(["data"=>$data]);
+        $session->set($isLogging);
+        $session->set(["data" => $data]);
     }
 
     public static function isAuthenticated() {
         $session = session();
-        return $session.get('isLoggedIn');
+        return $session->has('isLoggedIn');
     }
 
     public static function deleteAuth() {

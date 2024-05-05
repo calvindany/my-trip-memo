@@ -26,9 +26,10 @@ class AuthFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        if($arguments == 'authenticated') {
+        var_dump('ses');
+        if($arguments[0] == 'authenticated') {
             if(!Auth::isAuthenticated()) {
-                return redirect()->route('/admin/login');
+                return redirect()->route('home');
             }
         }
     }
