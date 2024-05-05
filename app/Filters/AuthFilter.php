@@ -29,7 +29,7 @@ class AuthFilter implements FilterInterface
         var_dump('ses');
         if($arguments[0] == 'authenticated') {
             if(!Auth::isAuthenticated()) {
-                return redirect()->route('home');
+                return redirect()->to(base_url('/'));
             }
         }
     }
