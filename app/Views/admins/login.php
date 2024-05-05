@@ -20,7 +20,11 @@
                 placeholder="Input your username"
                 class="p-4 border rounded"
                 name="username"
+                value="<?= session('input.username') ?? '' ?>"
               />
+              <?php if(isset(session('errors')['username'])) { ?>
+                <p class="text-sm font-poppins text-redblood"><?= session('errors')['username'] ?></p>
+              <?php } ?>
             </div>
             <div class="form-control">
               <label for="username">Password</label>
@@ -29,8 +33,15 @@
                 placeholder="Input your password"
                 class="p-4 border rounded"
                 name="password"
+                value="<?= session('input.password') ?? '' ?>"
               />
+              <?php if(isset(session('errors')['password'])) { ?>
+                <p class="text-sm font-poppins text-redblood"><?= session('errors')['password'] ?></p>
+              <?php } ?>
             </div>
+            <?php if(isset(session('errors')['message'])) { ?>
+              <p class="text-sm font-poppins text-redblood"><?= session('errors')['message'] ?></p>
+            <?php } ?>
             <div class="flex justify-end">
               <button type="submit" class="bg-redblood px-10 py-3 rounded">
                 Login
