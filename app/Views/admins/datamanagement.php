@@ -37,15 +37,24 @@
         <form action="/admin/create" enctype="multipart/form-data" method="post" class="w-full flex flex-col gap-5">
           <div class="form-control">
             <label for="title" class="text-lg">Title</label>
-            <input type="text" name="title" class="p-4 text-sm rounded" />
+            <input type="text" name="title" class="p-4 text-sm rounded" value="<?= session('input.title') ?? '' ?>"/>
+            <?php if(isset(session('errors')['title'])) { ?>
+              <p class="text-sm font-poppins text-redblood"><?= session('errors')['title'] ?></p>
+            <?php } ?>
           </div>
           <div class="form-control">
             <label for="title" class="text-lg">Address</label>
-            <input type="text" name="address" class="p-4 text-sm rounded" />
+            <input type="text" name="address" class="p-4 text-sm rounded" value="<?= session('input.address') ?? '' ?>" />
+            <?php if(isset(session('errors')['address'])) { ?>
+              <p class="text-sm font-poppins text-redblood"><?= session('errors')['address'] ?></p>
+            <?php } ?>
           </div>
           <div class="form-control">
             <label for="title" class="text-lg">Date</label>
-            <input type="date" name="date" class="p-4 text-sm rounded" />
+            <input type="date" name="date" class="p-4 text-sm rounded" value="<?= session('input.date') ?? '' ?>" />
+            <?php if(isset(session('errors')['date'])) { ?>
+              <p class="text-sm font-poppins text-redblood"><?= session('errors')['date'] ?></p>
+            <?php } ?>
           </div>
           <div class="form-control">
             <label for="thumbnail" class="text-lg">Thumnail Image</label>
@@ -57,8 +66,11 @@
             />
           </div>
           <div class="form-control">
-            <label for="summernote">Content</label>
-            <textarea id="summernote" name="description"></textarea>
+            <label for="summernote" class="text-lg">Content</label>
+            <textarea id="summernote" name="description"><?= session('input.description') ?? '' ?></textarea>
+            <?php if(isset(session('errors')['description'])) { ?>
+              <p class="text-sm font-poppins text-redblood"><?= session('errors')['description'] ?></p>
+            <?php } ?>
           </div>
           <button type="submit">Submit</button>
         </form>
