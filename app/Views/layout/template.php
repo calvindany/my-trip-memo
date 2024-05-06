@@ -6,10 +6,16 @@
     <link rel="stylesheet" type="text/css" href="/css/global.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Google Font Poppins -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+
+     <!-- Font Awesome -->
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
     <style>
       /* width */
       ::-webkit-scrollbar {
@@ -32,6 +38,8 @@
         background: #cf3135;
       }
     </style>
+
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -49,6 +57,7 @@
         },
       };
     </script>
+    
   </head>
   <body class="bg-lightgrey font-poppins">
     <nav
