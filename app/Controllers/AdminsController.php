@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Admins;
+use App\Models\BlogPosts;
 use App\Config\Services;
 use App\Libraries\Auth;
 
@@ -65,8 +66,55 @@ class AdminsController extends BaseController
         return redirect()->to(base_url('/admin/login'));
     }
 
-    public function create(): string
+    public function getCreate(): string
     {
         return view('admins/datamanagement');
+    }
+
+    public function postCreate()
+    {
+        $validation = \Config\Services::validation();
+        $blogPostModel = new BlogPosts();
+
+        $validation->setRules([
+            'title' => 'required',
+            'date' => 'required',
+            'address' => 'required',
+            'thumbnail' => 'mime_in[thumbnail,image/jpg,image/jpeg,image/gif,image/png,image/webp]',
+            'description' => 'required',
+        ]);
+
+        $data = [
+            'title' => $this->request->getPost('title'),
+            'date' => $this->request->getPost('date'),
+            'address' => $this->request->getPost('address'),
+            'description' => $this->request->getPost('description'),
+        ];
+
+        if(!($validation->run($data))) {
+            session()->setFlashdata('errors', $validation->getErrors());
+            session()->setFlashdata('input', $data);
+            return redirect()->to(base_url('/admin/creaate'));
+        }
+
+        $config['upload_path']   = 'public/uploads/';
+        $config['allowed_types'] = 'png|jpg|gif';
+        $config['max_size']      = 1000;
+        $config['file_ext_tolower'] = TRUE;
+
+        $img = $this->request->getFile('thumbnail');
+
+        if (! $img->hasMoved()) {
+            $filepath = WRITEPATH . 'uploads/' . $img->store();;
+
+            $data['thumbnail'] = $filepath;
+        }
+
+        $data['created_at'] = date('Y-m-d H:i:s');
+        $dta['fk_admin_id'] = 1;
+
+        $blogPostModel->insert($data);
+        
+        return redirect()->to(base_url('/admin/createe'));
     }
 }
