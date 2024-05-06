@@ -94,7 +94,7 @@ class AdminsController extends BaseController
         if(!($validation->run($data))) {
             session()->setFlashdata('errors', $validation->getErrors());
             session()->setFlashdata('input', $data);
-            return redirect()->to(base_url('/admin/creaate'));
+            return redirect()->to(base_url('/admin/create'));
         }
 
         $config['upload_path']   = 'public/uploads/';
@@ -102,19 +102,34 @@ class AdminsController extends BaseController
         $config['max_size']      = 1000;
         $config['file_ext_tolower'] = TRUE;
 
-        $img = $this->request->getFile('thumbnail');
-
-        if (! $img->hasMoved()) {
-            $filepath = WRITEPATH . 'uploads/' . $img->store();;
-
-            $data['thumbnail'] = $filepath;
+        try {
+            $img = $this->request->getFile('thumbnail');
+    
+            if (! $img->hasMoved()) {
+                $filepath = WRITEPATH . 'uploads/' . $img->store();;
+    
+                $data['thumbnail'] = $filepath;
+            }
+        } catch (\Exception $e) {
+            log_message('error', 'Exception: ' . $e->getMessage());
         }
 
         $data['created_at'] = date('Y-m-d H:i:s');
-        $dta['fk_admin_id'] = 1;
+        $data['fk_admin_id'] = 1;
 
-        $blogPostModel->insert($data);
+        try {
+            $blogPostModel->insert($data);
+
+            // Change this route to admin dashboard after done develop
+            return redirect()->to(base_url('/admin/create'));
+        } catch (\Exception $e) {
+            log_message('error', 'Exception: ' . $e->getMessage());
+
+            session()->setFlashdata('errors', [ "message" => "Internal Server Error"]);
+            session()->setFlashdata('input', $data);
+
+            return redirect()->to(base_url('/admin/create'));
+        }
         
-        return redirect()->to(base_url('/admin/createe'));
     }
 }
