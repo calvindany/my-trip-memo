@@ -10,6 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
       /* width */
       ::-webkit-scrollbar {
@@ -42,6 +43,7 @@
           extend: {
             fontFamily: {
               poppins: ["Poppins", "sans-serif"],
+              pasifico: ["Pacifico", "sans-serif"]
             },
             colors: {
               redblood: "#CF3135",
@@ -55,15 +57,15 @@
   </head>
   <body class="bg-lightgrey font-poppins">
     <nav
-      class="nav custom-container fixed top-0 z-[100] w-full min-h-[70px] bg-transparent"
+      class="nav custom-container fixed top-0 z-[100] w-full min-h-[70px] py-8 bg-transparent"
     >
       <div class="custom-content flex justify-between items-center">
-        <a class="navbar-brand" href="#">Logo</a>
-        <div class="navbar-nav flex justify-end gap-7">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-          <a class="nav-link" href="#">Features</a>
-          <a class="nav-link" href="#">Pricing</a>
-          <a class="nav-link">Disabled</a>
+        <a class="navbar-brand font-pasifico text-3xl" href="/admin">My Trip Memo</a>
+        <div class="navbar-nav flex justify-end items-center gap-7">
+          <a class="nav-link active" aria-current="page" href="/admin">Home</a>
+          <form action="/admin/logout" method="post">
+            <button type="submit" class="nav-link bg-redblood py-2 px-4 rounded text-white">Logout</button>
+          </form>
         </div>
       </div>
     </nav>

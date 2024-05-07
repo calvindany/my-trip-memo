@@ -132,4 +132,10 @@ class AdminsController extends BaseController
         }
         
     }
+
+    public function postLogout() {
+        Auth::deleteAuth();
+
+        return redirect()->to('/');
+    }
 }

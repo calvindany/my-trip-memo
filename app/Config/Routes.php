@@ -17,5 +17,6 @@ $routes->group('admin', static function($routes) {
     $routes->group('', ['filter' => 'authfilter:authenticated'], static function($routes) {
         $routes->get('create', 'AdminsController::getCreate', ['as' => 'admin.create.get']);
         $routes->post('create', 'AdminsController::postCreate', ['as' => 'admin.create.post']);
+        $routes->post('logout', 'AdminsController::postLogout', ['as' => 'admin.logout.post']);
     });
 });
