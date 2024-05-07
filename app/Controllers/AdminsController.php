@@ -84,7 +84,7 @@ class AdminsController extends BaseController
 
         $validation->setRules([
             'title' => 'required',
-            'date' => 'required',
+            'created_at' => 'required',
             'address' => 'required',
             'thumbnail' => 'mime_in[thumbnail,image/jpg,image/jpeg,image/gif,image/png,image/webp]',
             'description' => 'required',
@@ -92,7 +92,7 @@ class AdminsController extends BaseController
 
         $data = [
             'title' => $this->request->getPost('title'),
-            'date' => $this->request->getPost('date'),
+            'created_at' => $this->request->getPost('created_at'),
             'address' => $this->request->getPost('address'),
             'description' => $this->request->getPost('description'),
         ];
