@@ -30,11 +30,11 @@
       >
         <div class="w-full text-left mb-8">
           <h1 class="font-poppins font-medium text-2xl text-darkgrey mb-2">
-            <?php if($formtype == 'edit') { ?>Edit New Trip<?php } else { ?>Add New Trip<?php } ?>
+            <?php if($formtype == 'edit' || session('formtype') == 'edit') { ?>Edit New Trip<?php } else { ?>Add New Trip<?php } ?>
           </h1>
           <hr class="text-black" />
         </div>
-        <form action="/admin/create" enctype="multipart/form-data" method="post" class="w-full flex flex-col gap-5">
+        <form action="<?php if($formtype == 'edit' || session('formtype') == 'edit') { ?>/admin/update/<?= $data['pk_blog_id'] ?? '' ?><?php } else { ?>/admin/create<?php } ?>" enctype="multipart/form-data" method="post" class="w-full flex flex-col gap-5">
           <div class="form-control">
             <label for="title" class="text-lg">Title</label>
             <input type="text" name="title" class="p-4 text-sm rounded" value="<?= $data['title'] ?? (session('input.title') ?? '') ?>"/>
@@ -51,9 +51,9 @@
           </div>
           <div class="form-control">
             <label for="title" class="text-lg">Date</label>
-            <input type="date" name="date" class="p-4 text-sm rounded" value="<?= $data['created_at'] ?? (session('input.date') ?? '') ?>" />
-            <?php if(isset(session('errors')['date'])) { ?>
-              <p class="text-sm font-poppins text-redblood"><?= session('errors')['date'] ?></p>
+            <input type="date" name="created_at" class="p-4 text-sm rounded" value="<?= $data['created_at'] ?? (session('input.created_at') ?? '') ?>" />
+            <?php if(isset(session('errors')['created_at'])) { ?>
+              <p class="text-sm font-poppins text-redblood"><?= session('errors')['created_at'] ?></p>
             <?php } ?>
           </div>
           <div class="form-control">
@@ -75,6 +75,9 @@
               <p class="text-sm font-poppins text-redblood"><?= session('errors')['description'] ?></p>
             <?php } ?>
           </div>
+          <?php if(isset(session('errors')['message'])) { ?>
+            <p class="text-sm font-poppins text-redblood"><?= session('errors')['message'] ?></p>
+          <?php } ?>
           <button type="submit">Submit</button>
         </form>
       </div>
