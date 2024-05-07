@@ -30,7 +30,7 @@
       >
         <div class="w-full text-left mb-8">
           <h1 class="font-poppins font-medium text-2xl text-darkgrey mb-2">
-            <?php if(isset($data)) { ?>Edit New Trip<?php } else { ?>Add New Trip<?php } ?>
+            <?php if($formtype == 'edit') { ?>Edit New Trip<?php } else { ?>Add New Trip<?php } ?>
           </h1>
           <hr class="text-black" />
         </div>

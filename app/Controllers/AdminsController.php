@@ -71,7 +71,7 @@ class AdminsController extends BaseController
      */
     public function getCreate(): string
     {
-        return view('admins/datamanagement');
+        return view('admins/datamanagement', ['formtype' => 'add']);
     }
 
     /**
@@ -154,7 +154,7 @@ class AdminsController extends BaseController
             $date = explode(" ", $data['created_at']);
 
             $data['created_at'] = $date[0];
-            return view('admins/datamanagement', ['data' => $data]);
+            return view('admins/datamanagement', ['data' => $data, 'formtype' => 'edit']);
         }
     }
 
