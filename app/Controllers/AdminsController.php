@@ -66,11 +66,17 @@ class AdminsController extends BaseController
         return redirect()->to(base_url('/admin/login'));
     }
 
+    /**
+     *  Method GET | Route /admin/create
+     */
     public function getCreate(): string
     {
         return view('admins/datamanagement');
     }
 
+    /**
+     *  Method POST | Route /admin/create
+     */
     public function postCreate()
     {
         $validation = \Config\Services::validation();
@@ -133,6 +139,10 @@ class AdminsController extends BaseController
         
     }
 
+
+    /**
+     *  Method POST | Route /admin/logout
+     */
     public function postLogout() {
         Auth::deleteAuth();
 
