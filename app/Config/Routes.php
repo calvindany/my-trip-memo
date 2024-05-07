@@ -18,6 +18,7 @@ $routes->group('admin', static function($routes) {
         $routes->get('create', 'AdminsController::getCreate', ['as' => 'admin.create.get']);
         $routes->post('create', 'AdminsController::postCreate', ['as' => 'admin.create.post']);
         $routes->get('update/(:num)', 'AdminsController::getUpdate/$1', ['as' => 'admin.update.get']);
+        $routes->post('update/(:num)', 'AdminsController::postUpdate/$1', ['as' => 'admin.update.get']);
         $routes->post('logout', 'AdminsController::postLogout', ['as' => 'admin.logout.post']);
     });
 });

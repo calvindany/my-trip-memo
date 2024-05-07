@@ -158,6 +158,67 @@ class AdminsController extends BaseController
         }
     }
 
+    /**
+     *  Method POST | Route /admin/update/:id
+     */
+    public function postUpdate($id = '') {
+        $validation = \Config\Services::validation();
+        $blogPostModel = new BlogPosts();
+
+        $data = $blogPostModel->where('pk_blog_id', $id)->first();
+
+        if ($data === null) {
+            // Data not found, you can handle this case differently or load a default view
+            return view('errors/html/error_404');
+        } else {
+            
+            $validation->setRules([
+                'title' => 'required',
+                'created_at' => 'required',
+                'address' => 'required',
+                'thumbnail' => 'mime_in[thumbnail,image/jpg,image/jpeg,image/gif,image/png,image/webp]',
+                'description' => 'required',
+            ]);
+
+            $newdata = [
+                'title' => $this->request->getPost('title'),
+                'created_at' => $this->request->getPost('created_at'),
+                'address' => $this->request->getPost('address'),
+                'description' => $this->request->getPost('description'),
+            ];
+    
+            if(!($validation->run($data))) {
+                session()->setFlashdata('errors', $validation->getErrors());
+                session()->setFlashdata('input', $data);
+                session()->setFlashdata('formtype', 'edit');
+                return redirect()->to(base_url('/admin/update/' . $id));
+            }
+            
+            $newimg = $this->request->getFile('thumbnail');
+
+            if($newimg != null) {
+                if(file_exists(FCPATH . $data['thumbnail'])) {
+                    unlink(FCPATH . $data['thumbnail']);
+                }
+
+                $filename = $newimg->getRandomName();
+                $newimg->move('uploads/', $filename);
+    
+                $newdata['thumbnail'] = 'uploads/' . $filename;
+            } else {
+                $newdata['thumbnail'] = $data['thumbnail'];
+            }
+
+            $blogPostModel->update($id, $newdata);
+
+            return redirect()->to('/admin/');
+        }
+
+        session()->setFlashdata('input', $data);
+        session()->setFlashdata('formtype', 'edit');
+        session()->setFlashdata('errors', [ "message" => 'Data Not Found']);
+        return redirect()->to(base_url('/admin/update/' . $id));
+    }
 
     /**
      *  Method POST | Route /admin/logout
