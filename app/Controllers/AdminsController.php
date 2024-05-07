@@ -112,9 +112,10 @@ class AdminsController extends BaseController
             $img = $this->request->getFile('thumbnail');
     
             if (! $img->hasMoved()) {
-                $filepath = WRITEPATH . 'uploads/' . $img->store();;
+                $filename = $img->getRandomName();
+                $img->move('uploads/', $filename);
     
-                $data['thumbnail'] = $filepath;
+                $data['thumbnail'] = 'uploads/' . $filename;
             }
         } catch (\Exception $e) {
             log_message('error', 'Exception: ' . $e->getMessage());
@@ -137,6 +138,24 @@ class AdminsController extends BaseController
             return redirect()->to(base_url('/admin/create'));
         }
         
+    }
+
+    /**
+     *  Method GET | Route /admin/update/:id
+     */
+    public function getUpdate($id = '') {
+        $blogPostModel = new BlogPosts();
+
+        $data = $blogPostModel->where('pk_blog_id', $id)->first();
+        if ($data === null) {
+            // Data not found, you can handle this case differently or load a default view
+            return view('errors/html/error_404');
+        } else {
+            $date = explode(" ", $data['created_at']);
+
+            $data['created_at'] = $date[0];
+            return view('admins/datamanagement', ['data' => $data]);
+        }
     }
 
 
