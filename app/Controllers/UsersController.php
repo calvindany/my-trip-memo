@@ -9,8 +9,15 @@ class UsersController extends BaseController
 {
     public function index(): string
     {
-        // var_dump('aa');
-        return view('users/home');
+        $blogPostModel = new BlogPosts();
+
+        $posts = $blogPostModel->findAll();
+
+        $data = [
+            "posts" => $posts,
+        ];
+        
+        return view('users/home', $data);
     }
 
     public function getDetail($id = ''): string
