@@ -127,8 +127,8 @@ class AdminsController extends BaseController
         try {
             $blogPostModel->insert($data);
 
-            // Change this route to admin dashboard after done develop
-            return redirect()->to(base_url('/admin/create'));
+            session()->setFlashdata('success', ["message" => "Data has been uploaded!"]);
+            return redirect()->to(base_url('/admin/'));
         } catch (\Exception $e) {
             log_message('error', 'Exception: ' . $e->getMessage());
 
@@ -211,6 +211,7 @@ class AdminsController extends BaseController
 
             $blogPostModel->update($id, $newdata);
 
+            session()->setFlashdata('success', ["message" => "Data has been updated!"]);
             return redirect()->to('/admin/');
         }
 

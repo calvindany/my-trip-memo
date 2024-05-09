@@ -37,6 +37,26 @@
 
     <?= $this->renderSection('script') ?>
     
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <?php
+      // Sanitize the session data before using it
+      $successMessage = isset(session('success')['message']) ? htmlspecialchars(session('success')['message']) : '';
+    ?>
+
+    <?php if(!empty($successMessage)) { ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    title: 'Success',
+                    text: '<?php echo $successMessage; ?>',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                });
+            });
+        </script>
+    <?php } ?>
+
     <script>
       tailwind.config = {
         theme: {
