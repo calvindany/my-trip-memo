@@ -6,6 +6,7 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'UsersController::index', ['as' => 'home']);
+$routes->get('/detail/(:num)', 'UsersController::getDetail/$1', ['as' => 'detail']);
 
 $routes->group('admin', static function($routes) {
 

@@ -34,7 +34,7 @@
     <div class="custom-content">
         <div class="mb-8">
             <h1 class="font-poppins uppercase font-medium text-2xl text-darkgrey mb-2">
-                Jorney Memo
+                Journey Memo
             </h1>
             <hr class="border text-black" />
         </div>
