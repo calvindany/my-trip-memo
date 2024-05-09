@@ -10,7 +10,7 @@
   <section class="mb-8 px-4">
     <div class="flex justify-between items-center mb-5">
       <h2 class="text-xl font-semibold">Your Travel Posts</h2>
-      <button class="bg-redblood text-white font-medium px-4 py-[6px] rounded-md">New Travel</button>
+      <a href="<?= base_url('admin/create') ?>" class="bg-redblood text-white font-medium px-4 py-[6px] rounded-md">New Travel</a>
     </div>
 
     <!-- Travel List -->

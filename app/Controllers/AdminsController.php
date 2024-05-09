@@ -12,8 +12,8 @@ class AdminsController extends BaseController
     /**
      *  Method GET | Route /admin/login
      */
-    public function getLogin() 
-    {   
+    public function getLogin()
+    {
         session();
         $data = [
             "validation" => \Config\Services::validation(),
@@ -51,8 +51,8 @@ class AdminsController extends BaseController
 
         $registeredAdmin = $admins->where(['username' => $data['username']])->first();
 
-        if(isset($registeredAdmin)) {
-            if(password_verify($data['password'], $registeredAdmin['password'])) {
+        if (isset($registeredAdmin)) {
+            if (password_verify($data['password'], $registeredAdmin['password'])) {
                 $sessionData = [
                     "pk_admin_id" => $registeredAdmin['pk_admin_id'],
                     "username" => $registeredAdmin['username']
@@ -62,12 +62,12 @@ class AdminsController extends BaseController
             }
         }
 
-        session()->setFlashdata('errors', [ "message" => "Wrong Username or Password"]);
+        session()->setFlashdata('errors', ["message" => "Wrong Username or Password"]);
         return redirect()->to(base_url('/admin/login'));
     }
 
-     /**
-     *  Manage Post | Route /admin/
+    /**
+     *  Method GET | Route /admin/
      */
     public function manage()
     {
@@ -108,7 +108,7 @@ class AdminsController extends BaseController
             'description' => $this->request->getPost('description'),
         ];
 
-        if(!($validation->run($data))) {
+        if (!($validation->run($data))) {
             session()->setFlashdata('errors', $validation->getErrors());
             session()->setFlashdata('input', $data);
             return redirect()->to(base_url('/admin/create'));
@@ -121,11 +121,11 @@ class AdminsController extends BaseController
 
         try {
             $img = $this->request->getFile('thumbnail');
-    
-            if (! $img->hasMoved()) {
+
+            if (!$img->hasMoved()) {
                 $filename = $img->getRandomName();
                 $img->move('uploads/', $filename);
-    
+
                 $data['thumbnail'] = 'uploads/' . $filename;
             }
         } catch (\Exception $e) {
@@ -143,18 +143,18 @@ class AdminsController extends BaseController
         } catch (\Exception $e) {
             log_message('error', 'Exception: ' . $e->getMessage());
 
-            session()->setFlashdata('errors', [ "message" => "Internal Server Error"]);
+            session()->setFlashdata('errors', ["message" => "Internal Server Error"]);
             session()->setFlashdata('input', $data);
 
             return redirect()->to(base_url('/admin/create'));
         }
-        
     }
 
     /**
      *  Method GET | Route /admin/update/:id
      */
-    public function getUpdate($id = '') {
+    public function getUpdate($id = '')
+    {
         $blogPostModel = new BlogPosts();
 
         $data = $blogPostModel->where('pk_blog_id', $id)->first();
@@ -172,7 +172,8 @@ class AdminsController extends BaseController
     /**
      *  Method POST | Route /admin/update/:id
      */
-    public function postUpdate($id = '') {
+    public function postUpdate($id = '')
+    {
         $validation = \Config\Services::validation();
         $blogPostModel = new BlogPosts();
 
@@ -182,7 +183,7 @@ class AdminsController extends BaseController
             // Data not found, you can handle this case differently or load a default view
             return view('errors/html/error_404');
         } else {
-            
+
             $validation->setRules([
                 'title' => 'required',
                 'created_at' => 'required',
@@ -197,24 +198,24 @@ class AdminsController extends BaseController
                 'address' => $this->request->getPost('address'),
                 'description' => $this->request->getPost('description'),
             ];
-    
-            if(!($validation->run($data))) {
+
+            if (!($validation->run($data))) {
                 session()->setFlashdata('errors', $validation->getErrors());
                 session()->setFlashdata('input', $data);
                 session()->setFlashdata('formtype', 'edit');
                 return redirect()->to(base_url('/admin/update/' . $id));
             }
-            
+
             $newimg = $this->request->getFile('thumbnail');
 
-            if($newimg != null) {
-                if(file_exists(FCPATH . $data['thumbnail'])) {
+            if ($newimg != null) {
+                if (file_exists(FCPATH . $data['thumbnail'])) {
                     unlink(FCPATH . $data['thumbnail']);
                 }
 
                 $filename = $newimg->getRandomName();
                 $newimg->move('uploads/', $filename);
-    
+
                 $newdata['thumbnail'] = 'uploads/' . $filename;
             } else {
                 $newdata['thumbnail'] = $data['thumbnail'];
@@ -228,14 +229,32 @@ class AdminsController extends BaseController
 
         session()->setFlashdata('input', $data);
         session()->setFlashdata('formtype', 'edit');
-        session()->setFlashdata('errors', [ "message" => 'Data Not Found']);
+        session()->setFlashdata('errors', ["message" => 'Data Not Found']);
         return redirect()->to(base_url('/admin/update/' . $id));
+    }
+
+    /**
+     *  Method DELETE | Route /admin/delete
+     */
+    public function delete($id = '')
+    {
+        $blogPostModel = new BlogPosts();
+        $post = $blogPostModel->find($id);
+
+        if ($post === null) {
+            return view('errors/html/error_404');
+        }
+
+        $blogPostModel->delete($id);
+
+        return redirect()->back();
     }
 
     /**
      *  Method POST | Route /admin/logout
      */
-    public function postLogout() {
+    public function postLogout()
+    {
         Auth::deleteAuth();
 
         return redirect()->to('/');
