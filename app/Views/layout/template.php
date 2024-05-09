@@ -9,14 +9,22 @@
     
     <!-- Google Font Poppins -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:wght@400;500;600&display=swap"
-      rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:wght@400;500;600&display=swap"
+    rel="stylesheet"
     />
+
+    <!-- Google Font Pacifico -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
 
      <!-- Font Awesome -->
      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
       /* width */
       ::-webkit-scrollbar {
         width: 5px;
@@ -41,12 +49,14 @@
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
               poppins: ["Poppins", "sans-serif"],
+              pasifico: ["Pacifico", "sans-serif"],
             },
             colors: {
               redblood: "#CF3135",
@@ -64,13 +74,7 @@
       class="nav custom-container fixed top-0 z-[100] w-full min-h-[70px] bg-transparent"
     >
       <div class="custom-content flex justify-between items-center">
-        <a class="navbar-brand" href="#">Logo</a>
-        <div class="navbar-nav flex justify-end gap-7">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-          <a class="nav-link" href="#">Features</a>
-          <a class="nav-link" href="#">Pricing</a>
-          <a class="nav-link">Disabled</a>
-        </div>
+        <a class="navbar-brand font-pasifico text-3xl" href="/">My Trip Memo</a>
       </div>
     </nav>
 
