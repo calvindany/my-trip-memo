@@ -66,6 +66,17 @@ class AdminsController extends BaseController
         return redirect()->to(base_url('/admin/login'));
     }
 
+     /**
+     *  Manage Post | Route /admin/
+     */
+    public function manage()
+    {
+        $blogPostModel = new BlogPosts();
+        $data['posts'] = $blogPostModel->findAll();
+
+        return view('admins/manage-travels', $data);
+    }
+
     /**
      *  Method GET | Route /admin/create
      */

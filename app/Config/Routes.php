@@ -16,6 +16,7 @@ $routes->group('admin', static function($routes) {
     });
 
     $routes->group('', ['filter' => 'authfilter:authenticated'], static function($routes) {
+        $routes->get('', 'AdminsController::manage', ['as' => 'admin.manage']);
         $routes->get('create', 'AdminsController::getCreate', ['as' => 'admin.create.get']);
         $routes->post('create', 'AdminsController::postCreate', ['as' => 'admin.create.post']);
         $routes->get('update/(:num)', 'AdminsController::getUpdate/$1', ['as' => 'admin.update.get']);
