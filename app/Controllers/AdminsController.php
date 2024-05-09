@@ -16,6 +16,7 @@ class AdminsController extends BaseController
     {
         session();
         $data = [
+            "title" => "Login | My Trip Memo",
             "validation" => \Config\Services::validation(),
         ];
         return view('admins/login', $data);
@@ -73,6 +74,7 @@ class AdminsController extends BaseController
     {
         $blogPostModel = new BlogPosts();
         $data['posts'] = $blogPostModel->findAll();
+        $data['title'] = "Home | My Trip Memo";
 
         return view('admins/manage-travels', $data);
     }
@@ -82,7 +84,12 @@ class AdminsController extends BaseController
      */
     public function getCreate(): string
     {
-        return view('admins/datamanagement', ['formtype' => 'add']);
+        $data = [
+            "title" => "Create Post | My Trip Memo",
+            "formtype" => "add",
+        ];
+
+        return view('admins/datamanagement', $data);
     }
 
     /**
@@ -165,7 +172,14 @@ class AdminsController extends BaseController
             $date = explode(" ", $data['created_at']);
 
             $data['created_at'] = $date[0];
-            return view('admins/datamanagement', ['data' => $data, 'formtype' => 'edit']);
+
+            $datas = [
+                "title" => 'Update Post | My Trip Memo',
+                "data" => $data,
+                "formtype" => 'edit',
+            ];
+            
+            return view('admins/datamanagement', $datas);
         }
     }
 
