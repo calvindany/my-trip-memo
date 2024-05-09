@@ -14,6 +14,7 @@ class UsersController extends BaseController
         $posts = $blogPostModel->findAll();
 
         $data = [
+            "title" => "My Trip Memo",
             "posts" => $posts,
         ];
         
@@ -36,6 +37,7 @@ class UsersController extends BaseController
         }
 
         $data = [
+            "title" => $travelDetail['title'] . ' | My Trip Memo',
             'travelDetail' => $travelDetail
         ];
 
