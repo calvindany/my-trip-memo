@@ -59,7 +59,7 @@ class AdminsController extends BaseController
                     "username" => $registeredAdmin['username']
                 ];
                 Auth::setAuth($sessionData);
-                return redirect()->to(base_url('/admin/create'));
+                return redirect()->to(base_url('/admin/'));
             }
         }
 
@@ -139,7 +139,6 @@ class AdminsController extends BaseController
             log_message('error', 'Exception: ' . $e->getMessage());
         }
 
-        $data['created_at'] = date('Y-m-d H:i:s');
         $data['fk_admin_id'] = 1;
 
         try {
