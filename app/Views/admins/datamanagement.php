@@ -78,7 +78,9 @@
           <?php if(isset(session('errors')['message'])) { ?>
             <p class="text-sm font-poppins text-redblood"><?= session('errors')['message'] ?></p>
           <?php } ?>
-          <button type="submit">Submit</button>
+          <div class="flex justify-center">
+            <button type="submit" class="bg-redblood px-4 py-2 md:px-8 md:py-2 rounded text-white">Submit</button>
+          </div>
         </form>
       </div>
     </div>
