@@ -248,18 +248,32 @@ class AdminsController extends BaseController
     }
 
     /**
-     *  Method DELETE | Route /admin/delete
+     *  Method DELETE
      */
     public function delete($id = '')
     {
         $blogPostModel = new BlogPosts();
+
         $post = $blogPostModel->find($id);
 
-        if ($post === null) {
-            return view('errors/html/error_404');
-        }
+        if ($post) {
+            $postTitle = $post['title'];
 
-        $blogPostModel->delete($id);
+            $imagePath = FCPATH . $post['thumbnail'];
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+
+            $success = $blogPostModel->delete($id);
+
+            if ($success) {
+                session()->setFlashdata('success', ["message" => "You have deleted $postTitle travel post."]);
+            } else {
+                session()->setFlashdata('errors', ["message" => "Failed to delete post."]);
+            }
+        } else {
+            session()->setFlashdata('errors', ["message" => "Post not found."]);
+        }
 
         return redirect()->back();
     }

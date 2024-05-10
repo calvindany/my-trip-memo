@@ -38,7 +38,7 @@
                 <div class="mb-8 relative">
                     <img src="<?= base_url($travelDetail['thumbnail']) ?>" alt="Destination Image" class="w-full rounded-lg">
                     <div class="absolute bottom-0 right-0 bg-darkgrey text-white px-2 py-1 bg-opacity-50 rounded-br-lg">
-                        <p class="text-xs md:text-sm lg:text-base">Taken at: <?= $travelDetail['address'] ?></p>
+                        <p class="text-xs md:text-sm lg:text-base">Taken at <?= $travelDetail['address'] ?></p>
                     </div>
                 </div>
                 <!-- Memo Image & Location -->
